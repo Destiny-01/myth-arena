@@ -1,0 +1,9 @@
+body {
+  background-image: url("./assets/BgImage.png");
+  background-size: cover;
+  min-height: 100dvh;
+}
+
+body:has() {
+  background-image: url("./assets/LobbyBgImage.png");
+}
