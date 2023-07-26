@@ -25,7 +25,6 @@ export default function SelectWallet({ button }) {
       if (res.newUser) {
         setIsModalToggled(true);
         setReturnedProvider("metamask");
-        return;
       }
       setReturnedAddress(res.address);
       setProvider("metamask");
@@ -48,7 +47,6 @@ export default function SelectWallet({ button }) {
       if (res.newUser) {
         setIsModalToggled(true);
         setReturnedProvider("walletConnect");
-        return;
       }
       setReturnedAddress(res.address);
       setAddress(res.address);

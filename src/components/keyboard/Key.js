@@ -11,6 +11,7 @@ export function Key({ id, image, onClick, currentGuess, balance }) {
     .map((guess) => {
       return Number(guess);
     });
+  const isSelectPage = window.location.pathname === "/select-egg";
 
   const isClicked = (id) => {
     return guessArr.some((guess) => guess === id);
@@ -23,12 +24,12 @@ export function Key({ id, image, onClick, currentGuess, balance }) {
         <img src={enterButton} alt="" onClick={() => onClick(id)} />
       ) : id === "null" ? (
         <img src={eggNull} alt="eggNull" style={{ cursor: "not-allowed" }} />
-      ) : isClicked(id) ? (
+      ) : isClicked(id) && !isSelectPage && (!balance || balance === 0) ? (
         <img src={eggDefault} alt="" style={{ cursor: "not-allowed" }} />
       ) : (
         <Fragment>
           <img src={image} alt="" onClick={() => onClick(id)} />
-          {window.location.pathname === "/select-egg" && (
+          {isSelectPage && (
             <div className="balance">
               <p>{balance}</p>
             </div>

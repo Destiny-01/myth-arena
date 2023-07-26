@@ -26,6 +26,10 @@ import Edit from "../assets/icons/edit.svg";
 import ConfirmModal from "../components/modals/ConfirmModal";
 
 export default function Select({ socket }) {
+  const { address, player: currentPlayer } = usePlayerContext();
+  const { game, setGame } = useGameContext();
+  const navigate = useNavigate();
+  const [balances, setBalances] = useState(currentPlayer?.balances);
   const [isOpen, setIsOpen] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -33,9 +37,6 @@ export default function Select({ socket }) {
   const [perks, setPerks] = useState([]);
   const [canEdit, setCanEdit] = useState(false);
   const [time, setTime] = useState(20);
-  const { game, setGame } = useGameContext();
-  const { address, player: currentPlayer } = usePlayerContext();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (game) {
@@ -54,6 +55,7 @@ export default function Select({ socket }) {
     });
 
     socket.on("time", (time) => {
+      console.log("came", time);
       setTime(time);
     });
 
@@ -64,6 +66,10 @@ export default function Select({ socket }) {
 
   const onChar = (value) => {
     if (currentGuess.length < 5) {
+      setBalances((prevBalances) => {
+        prevBalances[value]--;
+        return prevBalances;
+      });
       setCurrentGuess(`${currentGuess}${value}`);
     }
   };
@@ -74,7 +80,7 @@ export default function Select({ socket }) {
 
   const handleSubmitTime = () => {
     setCanEdit(false);
-    socket.emit("time", time);
+    socket.emit("timeChanged", time);
   };
 
   const handleSubmit = async () => {
@@ -172,7 +178,7 @@ export default function Select({ socket }) {
             onChar={onChar}
             onDelete={onDelete}
             isTurn={true}
-            balances={currentPlayer.balances}
+            balances={balances}
             currentGuess={currentGuess}
           />
         </Col>

@@ -1,10 +1,11 @@
 import MythToken from "../contract/abi/MythToken.json";
 import Myth from "../contract/abi/Myth.json";
 import { ethers, providers, utils } from "ethers";
+import { wcProvider } from "./connect";
 
 const provider = window.ethereum
   ? new providers.Web3Provider(window.ethereum)
-  : new providers.Web3Provider();
+  : new providers.Web3Provider(wcProvider);
 const signer = provider.getSigner();
 
 export const tokenContract = new ethers.Contract(
@@ -60,7 +61,7 @@ export const getBalance = async (address) => {
     );
 
     return {
-      balance: Math.floor(utils.formatEther(balance.toString())),
+      balance: balance ? Math.floor(utils.formatEther(balance.toString())) : 0,
       eggsBalance: eggs.map(String),
     };
   } catch (err) {

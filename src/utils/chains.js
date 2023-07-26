@@ -19,7 +19,7 @@ export const testnet = {
     decimals: 18,
   },
   rpcUrls: ["https://api.s0.b.hmny.io"],
-  blockExplorerUrls: ["https://explorer.pops.one"],
+  blockExplorerUrls: ["https://explorer.testnet.one"],
 };
 
 export const devnet = {

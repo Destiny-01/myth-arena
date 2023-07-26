@@ -13,6 +13,8 @@ import { wonGame } from "../utils/contract";
 import { randomNumbers } from "../utils";
 import ConfirmModal from "../components/modals/ConfirmModal";
 import PerkBox from "../components/perks/PerkBox";
+import { useGameContext } from "../context/GameContext";
+import PerkModal from "../components/modals/PerkModal";
 
 export default function Arena({ socket }) {
   const [currentGuess, setCurrentGuess] = useState("");
@@ -36,6 +38,7 @@ export default function Arena({ socket }) {
   const [opponentInjuredStatus, setOpponentInjuredStatus] = useState([]);
   const { id } = useParams();
   const { address } = usePlayerContext();
+  const { game } = useGameContext();
 
   useEffect(() => {
     socket.on("myGuess", (game) => {
@@ -243,8 +246,16 @@ export default function Arena({ socket }) {
             />
           </Row>
 
-          <Row className="mx-md-3 align-items-baseline">
-            <PerkBox selectedPerks={[1, 2, 3, 4]} />
+          <Row className="mx-md-3 align-items-start mt-4">
+            <PerkModal
+              selectedPerks={
+                address === game.player1
+                  ? game.player1.perks
+                  : address === game.player2
+                  ? game.player2.perks
+                  : [-1, -1, -1, -1]
+              }
+            />
             <Keyboard
               onChar={onChar}
               onDelete={onDelete}

@@ -149,6 +149,7 @@ export default function Lobby({ socket }) {
           <Input
             defaultValue={data.value}
             className="waiting-input"
+            onKeyDown={(e) => e.key === "Enter" && onClick()}
             onChange={(e) => setCode(e.target.value)}
             disabled={data.disabled}
           />

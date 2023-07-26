@@ -1,9 +1,9 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import axios from "../config/axios";
 import { providers, Wallet } from "ethers";
-import { mumbai } from "./chains";
+import { testnet } from "./chains";
 
-const chain = mumbai;
+const chain = testnet;
 const { ethereum } = window;
 export const wcProvider = new WalletConnectProvider({
   rpc: {
@@ -23,6 +23,7 @@ export const metamaskConnect = async () => {
       .focus();
     return;
   }
+
   const accounts = await ethereum.request({ method: "eth_requestAccounts" });
   const chainId = await ethereum.request({ method: "eth_chainId" });
 

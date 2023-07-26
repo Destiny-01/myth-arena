@@ -6,13 +6,6 @@ import eggUnknown from "../../assets/eggs/eggUnknown.png";
 import { Col } from "reactstrap";
 
 export function Cell({ id, state }) {
-  const eggsState = [
-    {
-      status: "dead",
-      image: deadEgg,
-    },
-  ];
-
   return (
     <Col className="position-relative cell">
       {state === "unknown" ? (
@@ -22,9 +15,9 @@ export function Cell({ id, state }) {
       ) : (
         <img src={eggDefault} alt="" />
       )}
-      {state && state !== "default" && state !== "_" && state !== "unknown" && (
+      {state && state === "dead" && (
         <img
-          src={eggsState.find((el) => el.status === state).image}
+          src={deadEgg}
           className="position-absolute top-50 start-50 translate-middle"
           alt=""
         />

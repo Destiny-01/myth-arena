@@ -26,7 +26,7 @@ export default function Keyboard({
   };
 
   return (
-    <div className="keyboard  mb-3">
+    <div className="keyboard mt-0 mb-4">
       <div
         className={
           !isTurn ||

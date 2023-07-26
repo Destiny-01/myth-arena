@@ -52,6 +52,7 @@ export default function UsernameModal({
             className="waiting-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && onClick()}
           />
           <Button onClick={onClick}>
             <i className="bi bi-send"></i>

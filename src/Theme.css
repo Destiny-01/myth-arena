@@ -506,15 +506,32 @@ img[alt="eggNull"] {
 
 .perk {
   min-width: 90%;
-}
-
-.perk img {
+  position: relative;
   border-radius: 2px;
   padding: 10px 4px 12px 4px;
   border: 2px solid var(--secondary);
   background: linear-gradient(357deg, #0442a5 0%, #268db9 100%);
   box-shadow: -4px -4px 8px 0px rgba(0, 0, 0, 0.3) inset,
     4px 4px 8px 0px rgba(255, 255, 255, 0.3) inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.modal-perk {
+  margin: auto;
+  margin-top: 16px;
+  max-width: 80%;
+}
+
+.modal-perk p {
+  margin-bottom: 4px;
+}
+
+.perk img {
+  margin-top: auto;
 }
 
 .perks-wrapper {
@@ -527,6 +544,11 @@ img[alt="eggNull"] {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5) inset;
   gap: 8px;
   padding: 8px;
+}
+
+.perk-modal .perk {
+  width: 200px;
+  height: 220px;
 }
 
 .perks-wrapper > * {
